@@ -1,0 +1,51 @@
+create database project3_orpazme;
+use project3_orpazme;
+
+create table users (
+	id int auto_increment,
+    first_name varchar(255),
+    last_name varchar(255),
+    username varchar(255),
+    password text,
+    role varchar (255) default "user",
+    primary key (id)
+);
+
+create table vacations (
+	id int auto_increment,
+    description varchar (255) not null,
+    destination varchar (255) not null,
+    from_date date not null, 
+    to_date date not null,
+    price int not null,
+    img text not null,
+    primary key (id)
+);
+
+create table connecter (
+	id int auto_increment,
+    user_id int,
+    vac_id int,
+    primary key (id),
+    foreign key (user_id) references users (id) on delete cascade,
+    foreign key (vac_id) references vacations (id) on delete cascade
+);
+
+ insert into users (first_name, last_name, username, password)
+ values ("John", "Li", "johnli", "$2b$10$S8cIcU69yFbmai5FB1t8t.0uGu06ihfCiI4BkLovl7OE.lXo6nAea"),
+("Jo", "Mi", "jojo", "$2b$10$wawFE24V0MWfsBFOxvueNeBcIJ84UKlmJOTBgepX9r0Ah1dIU8Zb."),
+("Nana", "Banana", "nanabanana", "$2b$10$tXsGVIeq0uhFoFgBSi9Vg.oaa6Dnmh3.WnWlIUVXgfnRp8jQasVsK"),
+("Avi", "Ron", "Aviron", "$2b$10$rQkXpavEwq4qfknUEMWjFeOmkuwM4qiXqGafFe01gBtGc0Q/G0lO6");
+
+update users set role="admin" where id=2;
+
+insert into vacations (description, destination, from_date, to_date, price, img) 
+values ("If you are looking for a great vacation with fantastic views, El Calafate is the place for you!",
+"El Calafate, Argentina", "2021-07-03T21:00:00.000Z", "2021-07-27T21:00:00.000Z", 1400, "https://www.101viajes.com/sites/default/files/styles/guia-full/public/glaciar-perito-moreno.jpg"),
+("Koror is the largest city in Palau. It offers a unique experience in this amazing island country in the western Pacific",
+ "Koror, Palau", "2021-08-21T21:00:00.000Z", "2021-09-01T21:00:00.000Z", 899, "https://www.unusualtraveler.com/wp-content/uploads/2021/01/DSC04516-Pano.jpg"),
+ ("Tel-Aviv has about everything to offer you, whether you are looking for great restaurants, bars, museums or beaches, this is the place for you!",
+ "Tel-Aviv, Israel", "2021-08-28T21:00:00.000Z", "2021-09-10T21:00:00.000Z", 500, "https://static.euronews.com/articles/stories/05/50/09/52/600x338_cmsv2_571b08d7-0254-5d4d-ab94-ee17a02a1db8-5500952.jpg"),
+ ("Madrid is a modern european city, it is big and nice and has many activities for all of the family", "Madrid, Spain", "2021-10-22T21:00:00.000Z", "2021-10-31T21:00:00.000Z", 649, "http://s1.travix.com/eu/europe-spain-madrid-palace-medium.jpg"); 
+
+
